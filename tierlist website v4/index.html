@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Tripod Tiers</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;700&family=Outfit:wght@500;800&display=swap');
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background: linear-gradient(-45deg, #0b0b0e, #1a1a24, #0b0b0e, #12121a);
+            background-size: 400% 400%;
+            animation: gradientBG 15s ease infinite;
+            color: white;
+            font-family: 'Inter', sans-serif;
+            display: flex;
+            justify-content: center;
+            padding: 40px 20px;
+            margin: 0;
+            min-height: 100vh;
+        }
+
+        @keyframes gradientBG {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        .container {
+            width: 100%;
+            max-width: 600px;
+        }
+
+        h1 {
+            text-align: center;
+            font-family: 'Outfit', sans-serif;
+            font-weight: 800;
+            margin-bottom: 10px;
+            color: #efefff;
+            font-size: 2.5rem;
+        }
+
+        /* Tabs Styling */
+        .tabs {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            margin-bottom: 30px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            padding-bottom: 10px;
+        }
+
+        .tab-btn {
+            background: none;
+            border: none;
+            color: #777;
+            font-family: 'Outfit', sans-serif;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+            padding: 5px 10px;
+        }
+
+        .tab-btn.active {
+            color: #fff;
+        }
+
+        .tab-btn.active::after {
+            content: '';
+            position: absolute;
+            bottom: -11px;
+            left: 0;
+            width: 100%;
+            height: 3px;
+            background: #ff7fff; /* S-tier pink accent */
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(255, 127, 255, 0.5);
+        }
+
+        .tab-btn:hover {
+            color: #ccc;
+        }
+
+        /* Content Sections */
+        .tier-list {
+            display: none; /* Hidden by default */
+            flex-direction: column;
+            gap: 12px;
+            animation: sectionFade 0.5s ease forwards;
+        }
+
+        .tier-list.active {
+            display: flex;
+        }
+
+        @keyframes sectionFade {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Row Styling */
+        .row {
+            background: rgba(21, 21, 27, 0.8);
+            backdrop-filter: blur(10px);
+            border: 1px solid #26262e;
+            border-radius: 25px;
+            padding: 12px 20px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+
+        .row:hover {
+            transform: scale(1.04);
+            background: rgba(28, 28, 36, 0.9);
+            border-color: #555;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.3);
+        }
+
+        .left {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .rank-num {
+            font-weight: 900;
+            color: #444;
+            width: 25px;
+            font-size: 0.9rem;
+        }
+
+        .pfp {
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
+            border: 2px solid #26262e;
+            object-fit: cover;
+            background: #222;
+        }
+
+        .name {
+            font-weight: 700;
+            font-size: 1.1rem;
+            font-family: 'Outfit', sans-serif;
+        }
+
+        .tier {
+            width: 38px;
+            height: 38px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 14px;
+            font-weight: 900;
+            font-size: 1rem;
+            color: #000;
+        }
+
+        /* Tier Colors */
+        .s { background: #ff7fff; box-shadow: 0 0 15px rgba(255, 127, 255, 0.4); }
+        .a { background: #ff4d4d; color: white; box-shadow: 0 0 15px rgba(255, 77, 77, 0.4); }
+        .b { background: #ffaa42; box-shadow: 0 0 15px rgba(255, 170, 66, 0.4); }
+        .c { background: #ffdf5d; box-shadow: 0 0 15px rgba(255, 223, 93, 0.4); }
+        .d { background: #5dff8a; box-shadow: 0 0 15px rgba(93, 255, 138, 0.4); }
+
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h1>Tripod Tiers</h1>
+
+    <div class="tabs">
+        <button class="tab-btn active" onclick="openTab('smp')">SMP</button>
+        <button class="tab-btn" onclick="openTab('pvp')">PvP</button>
+    </div>
+    
+    <div id="smp" class="tier-list active">
+        <div class="row">
+            <div class="left">
+                <span class="rank-num">01</span>
+                <img src="itzjohio.png" class="pfp">
+                <span class="name">ItzJohio</span>
+            </div>
+            <div class="tier s">S</div>
+        </div>
+        <div class="row">
+            <div class="left">
+                <span class="rank-num">02</span>
+                <img src="mohamm3dJA.png" class="pfp">
+                <span class="name">mohamm3dJA</span>
+            </div>
+            <div class="tier a">A</div>
+        </div>
+        <div class="row">
+            <div class="left">
+                <span class="rank-num">03</span>
+                <img src="WaterPlant.png" class="pfp">
+                <span class="name">WaterPlant</span>
+            </div>
+            <div class="tier a">A</div>
+        </div>
+        <div class="row">
+            <div class="left">
+                <span class="rank-num">04</span>
+                <img src="mazotic.png" class="pfp">
+                <span class="name">mazotic</span>
+            </div>
+            <div class="tier b">B</div>
+        </div>
+        <div class="row">
+            <div class="left">
+                <span class="rank-num">05</span>
+                <img src="MaxieX.png" class="pfp">
+                <span class="name">MaxieX</span>
+            </div>
+            <div class="tier b">B</div>
+        </div>
+        <div class="row">
+            <div class="left">
+                <span class="rank-num">06</span>
+                <img src="gmhead.png" class="pfp">
+                <span class="name">Gmplayz_</span>
+            </div>
+            <div class="tier c">C</div>
+        </div>
+        <div class="row">
+            <div class="left">
+                <span class="rank-num">07</span>
+                <img src="Wraxiee_avatar_face (1).png" class="pfp">
+                <span class="name">Wraxiee</span>
+            </div>
+            <div class="tier c">C</div>
+        </div>
+        <div class="row">
+            <div class="left">
+                <span class="rank-num">08</span>
+                <img src="BetterSyco.png" class="pfp">
+                <span class="name">Bettersyco</span>
+            </div>
+            <div class="tier c">C</div>
+        </div>
+        <div class="row">
+            <div class="left">
+                <span class="rank-num">09</span>
+                <img src="samy3mk.png" class="pfp">
+                <span class="name">samy3mk</span>
+            </div>
+            <div class="tier d">D</div>
+        </div>
+    </div>
+
+    <div id="pvp" class="tier-list">
+        <div class="row">
+            <div class="left">
+                <span class="rank-num">01</span>
+                <img src="mazotic.png" class="pfp">
+                <span class="name">mazotic</span>
+            </div>
+            <div class="tier s">S</div>
+        </div>
+        <div class="row">
+            <div class="left">
+                <span class="rank-num">02</span>
+                <img src="mohamm3dJA.png" class="pfp">
+                <span class="name">mohamm3dJA</span>
+            </div>
+            <div class="tier a">A</div>
+        </div>
+        <div class="row">
+            <div class="left">
+                <span class="rank-num">03</span>
+                <img src="WaterPlant.png" class="pfp">
+                <span class="name">WaterPlant</span>
+            </div>
+            <div class="tier a">A</div>
+        </div>
+        <div class="row">
+            <div class="left">
+                <span class="rank-num">04</span>
+                <img src="MaxieX.png" class="pfp">
+                <span class="name">MaxieX</span>
+            </div>
+            <div class="tier b">B</div>
+        </div>
+        <div class="row">
+            <div class="left">
+                <span class="rank-num">05</span>
+                <img src="samy3mk.png" class="pfp">
+                <span class="name">samy3mk</span>
+            </div>
+            <div class="tier b">B</div>
+        </div>
+        <div class="row">
+            <div class="left">
+                <span class="rank-num">06</span>
+                <img src="Wraxiee_avatar_face (1).png" class="pfp">
+                <span class="name">Wraxiee</span>
+            </div>
+            <div class="tier c">C</div>
+        </div>
+        <div class="row">
+            <div class="left">
+                <span class="rank-num">07</span>
+                <img src="gmhead.png" class="pfp">
+                <span class="name">Gmplayz_</span>
+            </div>
+            <div class="tier c">C</div>
+        </div>
+        <div class="row">
+            <div class="left">
+                <span class="rank-num">08</span>
+                <img src="BetterSyco.png" class="pfp">
+                <span class="name">Bettersyco</span>
+            </div>
+            <div class="tier c">C</div>
+        </div>
+        <div class="row">
+            <div class="left">
+                <span class="rank-num">09</span>
+                <img src="itzjohio.png" class="pfp">
+                <span class="name">ItzJohio</span>
+            </div>
+            <div class="tier d">D</div>
+        </div>
+    </div>
+</div>
+
+<script>
+    function openTab(tabName) {
+        // Hide all lists
+        var lists = document.getElementsByClassName("tier-list");
+        for (var i = 0; i < lists.length; i++) {
+            lists[i].classList.remove("active");
+        }
+
+        // Deactivate all buttons
+        var buttons = document.getElementsByClassName("tab-btn");
+        for (var i = 0; i < buttons.length; i++) {
+            buttons[i].classList.remove("active");
+        }
+
+        // Show current tab and activate button
+        document.getElementById(tabName).classList.add("active");
+        event.currentTarget.classList.add("active");
+    }
+</script>
+
+</body>
+</html>
