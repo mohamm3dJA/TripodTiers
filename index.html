@@ -20,7 +20,7 @@
             justify-content: center;
             padding: 40px 20px;
             margin: 0;
-            min-height: 120vh; /* Increased for scrolling */
+            min-height: 120vh;
         }
 
         @keyframes gradientBG {
@@ -35,7 +35,6 @@
             transition: max-width 0.5s ease;
         }
 
-        /* Wider container for the grid view */
         .container.wide {
             max-width: 850px;
         }
@@ -49,7 +48,6 @@
             font-size: 2.5rem;
         }
 
-        /* Tabs Styling */
         .tabs {
             display: flex;
             justify-content: center;
@@ -89,11 +87,6 @@
             box-shadow: 0 0 10px rgba(255, 127, 255, 0.5);
         }
 
-        .tab-btn:hover {
-            color: #ccc;
-        }
-
-        /* Content Sections */
         .tier-list {
             display: none;
             flex-direction: column;
@@ -110,7 +103,6 @@
             to { opacity: 1; transform: translateY(0); }
         }
 
-        /* Row Styling */
         .row {
             background: rgba(21, 21, 27, 0.8);
             backdrop-filter: blur(10px);
@@ -121,13 +113,6 @@
             align-items: center;
             justify-content: space-between;
             transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-        }
-
-        .row:hover {
-            transform: scale(1.02);
-            background: rgba(28, 28, 36, 0.9);
-            border-color: #555;
-            box-shadow: 0 10px 20px rgba(0,0,0,0.3);
         }
 
         .left {
@@ -171,7 +156,6 @@
             text-transform: uppercase;
         }
 
-        /* Discipline Tiers (Square Layout) */
         .tiers-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
@@ -194,25 +178,24 @@
             transform: translateY(-5px);
         }
 
+        /* --- UPDATED ICON BOX --- */
         .icon-box {
-            width: 64px;
-            height: 64px;
-            /* Updated for better alignment and modern semi-transparent look */
-            background: rgba(255, 255, 255, 0.03); 
-            border-radius: 18px;
+            width: 80px;
+            height: 80px;
+            background: transparent; /* Fully transparent background */
             margin: 0 auto 15px;
             display: flex;
             align-items: center;
             justify-content: center;
-            border: 1px solid rgba(255,255,255,0.05);
+            border: none; /* Removed borders for true transparency */
         }
 
         .icon-box img {
-            width: 40px;
-            height: 40px;
+            width: 54px;
+            height: 54px;
             object-fit: contain;
-            /* Extra alignment precaution */
-            display: block; 
+            display: block;
+            margin: auto; /* Centers image inside flexbox */
         }
 
         .card-title {
@@ -234,12 +217,10 @@
             font-size: 0.95rem;
         }
 
-        /* Skill Ranks Colors */
         .lt4 { background: #ff7fff; box-shadow: 0 0 10px rgba(255, 127, 255, 0.3); }
         .ht5 { background: #ff4d4d; color: white; box-shadow: 0 0 10px rgba(255, 77, 77, 0.3); }
         .lt5 { background: #ffaa42; box-shadow: 0 0 10px rgba(255, 170, 66, 0.3); }
 
-        /* Legacy Colors for Main Tabs */
         .s { background: #ff7fff; }
         .a { background: #ff4d4d; color: white; }
         .b { background: #ffaa42; }
