@@ -7,7 +7,22 @@
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;700&family=Outfit:wght@500;800&display=swap');
 
         html {
+            /* Keep this as a backup */
             scroll-behavior: smooth;
+        }
+
+        /* Lenis Recommended CSS for Smoothness */
+        html.lenis {
+          height: auto;
+        }
+        .lenis.lenis-smooth {
+          scroll-behavior: auto !important;
+        }
+        .lenis.lenis-smooth [data-lenis-prevent] {
+          overscroll-behavior: contain;
+        }
+        .lenis.lenis-stopped {
+          overflow: hidden;
         }
 
         body {
@@ -20,7 +35,7 @@
             justify-content: center;
             padding: 40px 20px;
             margin: 0;
-            min-height: 120vh;
+            min-height: 150vh; /* Increased to ensure enough scroll space */
         }
 
         @keyframes gradientBG {
@@ -274,7 +289,6 @@
 
     <div id="disciplines" class="tier-list">
         <div class="tiers-grid">
-            
             <div class="tier-card">
                 <div class="icon-box"><img src="sword.png" alt="Sword"></div>
                 <span class="card-title">Sword</span>
@@ -323,7 +337,7 @@
             </div>
 
             <div class="tier-card">
-                <div class="icon-box"><img src="diasmp.png" alt="Diamond SMP"></div>
+                <div class="icon-box"><img src="smp.png" alt="Diamond SMP"></div>
                 <span class="card-title">Diamond SMP</span>
                 <div class="player-entry"><span>MaxieX</span><span class="tier ht5 t-small">HT5</span></div>
             </div>
@@ -335,18 +349,39 @@
             </div>
 
             <div class="tier-card">
-                <div class="icon-box"><img src="nethpot.png" alt="Netherite Pot"></div>
+                <div class="icon-box"><img src="potion.png" alt="Netherite Pot"></div>
                 <span class="card-title">Netherite Pot</span>
                 <div class="player-entry"><span>Wraxiee</span><span class="tier ht5 t-small">HT5</span></div>
                 <div class="player-entry"><span>mohamm3dJA</span><span class="tier lt5 t-small">LT5</span></div>
                 <div class="player-entry"><span>MaxieX</span><span class="tier lt5 t-small">LT5</span></div>
             </div>
-
         </div>
     </div>
 </div>
 
+<script src="https://unpkg.com/lenis@1.1.18/dist/lenis.min.js"></script>
+
 <script>
+    // 1. Initialize Lenis Smooth Scroll
+    const lenis = new Lenis({
+      duration: 1.2,
+      easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+      direction: 'vertical',
+      gestureDirection: 'vertical',
+      smooth: true,
+      mouseMultiplier: 1,
+      smoothTouch: false,
+      touchMultiplier: 2,
+      infinite: false,
+    })
+
+    function raf(time) {
+      lenis.raf(time)
+      requestAnimationFrame(raf)
+    }
+    requestAnimationFrame(raf)
+
+    // 2. Tab Switching Function
     function openTab(tabName) {
         var container = document.getElementById("mainContainer");
         if(tabName === 'disciplines') {
@@ -364,6 +399,9 @@
         }
         document.getElementById(tabName).classList.add("active");
         event.currentTarget.classList.add("active");
+        
+        // Notify Lenis that the layout has changed (important!)
+        lenis.scrollTo(0, { immediate: true });
     }
 </script>
 
