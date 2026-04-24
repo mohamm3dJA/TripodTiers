@@ -178,24 +178,24 @@
             transform: translateY(-5px);
         }
 
-        /* --- UPDATED ICON BOX --- */
+        /* --- UPDATED: ICON BOX FULLY TRANSPARENT & CENTERED --- */
         .icon-box {
-            width: 80px;
-            height: 80px;
-            background: transparent; /* Fully transparent background */
-            margin: 0 auto 15px;
+            width: 70px;
+            height: 70px;
+            background: transparent !important; /* Forces transparency */
+            border: none !important;           /* Removes any remaining border */
+            box-shadow: none !important;       /* Removes any glow/shadow */
+            margin: 0 auto 10px;
             display: flex;
-            align-items: center;
-            justify-content: center;
-            border: none; /* Removed borders for true transparency */
+            align-items: center;               /* Vertically center */
+            justify-content: center;            /* Horizontally center */
         }
 
         .icon-box img {
-            width: 54px;
-            height: 54px;
+            max-width: 55px;
+            max-height: 55px;
             object-fit: contain;
             display: block;
-            margin: auto; /* Centers image inside flexbox */
         }
 
         .card-title {
