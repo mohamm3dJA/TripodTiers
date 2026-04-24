@@ -20,7 +20,7 @@
             justify-content: center;
             padding: 40px 20px;
             margin: 0;
-            min-height: 120vh; /* Increased for scrolling */
+            min-height: 120vh;
         }
 
         @keyframes gradientBG {
@@ -35,7 +35,6 @@
             transition: max-width 0.5s ease;
         }
 
-        /* Wider container for the grid view */
         .container.wide {
             max-width: 850px;
         }
@@ -49,7 +48,6 @@
             font-size: 2.5rem;
         }
 
-        /* Tabs Styling */
         .tabs {
             display: flex;
             justify-content: center;
@@ -89,11 +87,6 @@
             box-shadow: 0 0 10px rgba(255, 127, 255, 0.5);
         }
 
-        .tab-btn:hover {
-            color: #ccc;
-        }
-
-        /* Content Sections */
         .tier-list {
             display: none;
             flex-direction: column;
@@ -110,7 +103,6 @@
             to { opacity: 1; transform: translateY(0); }
         }
 
-        /* Row Styling */
         .row {
             background: rgba(21, 21, 27, 0.8);
             backdrop-filter: blur(10px);
@@ -121,13 +113,6 @@
             align-items: center;
             justify-content: space-between;
             transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-        }
-
-        .row:hover {
-            transform: scale(1.02);
-            background: rgba(28, 28, 36, 0.9);
-            border-color: #555;
-            box-shadow: 0 10px 20px rgba(0,0,0,0.3);
         }
 
         .left {
@@ -166,11 +151,11 @@
             justify-content: center;
             border-radius: 14px;
             font-weight: 900;
-            font-size: 1rem;
+            font-size: 0.85rem;
             color: #000;
+            text-transform: uppercase;
         }
 
-        /* Discipline Tiers (Square Layout) */
         .tiers-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
@@ -191,7 +176,6 @@
         .tier-card:hover {
             border-color: #ff7fff;
             transform: translateY(-5px);
-            box-shadow: 0 10px 25px rgba(255, 127, 255, 0.1);
         }
 
         .icon-box {
@@ -218,7 +202,6 @@
             font-size: 1.3rem;
             margin-bottom: 20px;
             display: block;
-            letter-spacing: 0.5px;
         }
 
         .player-entry {
@@ -230,21 +213,27 @@
             border-radius: 12px;
             margin-bottom: 8px;
             font-size: 0.95rem;
-            border: 1px solid rgba(255,255,255,0.03);
         }
 
-        /* Tier Colors */
-        .s { background: #ff7fff; box-shadow: 0 0 15px rgba(255, 127, 255, 0.4); }
-        .a { background: #ff4d4d; color: white; box-shadow: 0 0 15px rgba(255, 77, 77, 0.4); }
-        .b { background: #ffaa42; box-shadow: 0 0 15px rgba(255, 170, 66, 0.4); }
-        .c { background: #ffdf5d; box-shadow: 0 0 15px rgba(255, 223, 93, 0.4); }
-        .d { background: #5dff8a; box-shadow: 0 0 15px rgba(93, 255, 138, 0.4); }
+        /* Skill Ranks Colors */
+        .lt4 { background: #ff7fff; box-shadow: 0 0 10px rgba(255, 127, 255, 0.3); }
+        .ht5 { background: #ff4d4d; color: white; box-shadow: 0 0 10px rgba(255, 77, 77, 0.3); }
+        .lt5 { background: #ffaa42; box-shadow: 0 0 10px rgba(255, 170, 66, 0.3); }
+
+        /* Legacy Colors for Main Tabs */
+        .s { background: #ff7fff; }
+        .a { background: #ff4d4d; color: white; }
+        .b { background: #ffaa42; }
+        .c { background: #ffdf5d; }
+        .d { background: #5dff8a; }
 
         .t-small {
             font-weight: 900;
             padding: 2px 8px;
             border-radius: 6px;
-            font-size: 0.8rem;
+            font-size: 0.75rem;
+            width: auto;
+            height: auto;
         }
 
     </style>
@@ -261,153 +250,27 @@
     </div>
     
     <div id="smp" class="tier-list active">
-        <div class="row">
-            <div class="left">
-                <span class="rank-num">01</span>
-                <img src="itzjohio.png" class="pfp">
-                <span class="name">ItzJohio</span>
-            </div>
-            <div class="tier s">S</div>
-        </div>
-        <div class="row">
-            <div class="left">
-                <span class="rank-num">02</span>
-                <img src="mohamm3dJA.png" class="pfp">
-                <span class="name">mohamm3dJA</span>
-            </div>
-            <div class="tier a">A</div>
-        </div>
-        <div class="row">
-            <div class="left">
-                <span class="rank-num">03</span>
-                <img src="WaterPlant.png" class="pfp">
-                <span class="name">WaterPlant</span>
-            </div>
-            <div class="tier a">A</div>
-        </div>
-        <div class="row">
-            <div class="left">
-                <span class="rank-num">04</span>
-                <img src="mazotic.png" class="pfp">
-                <span class="name">mazotic</span>
-            </div>
-            <div class="tier b">B</div>
-        </div>
-        <div class="row">
-            <div class="left">
-                <span class="rank-num">05</span>
-                <img src="MaxieX.png" class="pfp">
-                <span class="name">MaxieX</span>
-            </div>
-            <div class="tier b">B</div>
-        </div>
-        <div class="row">
-            <div class="left">
-                <span class="rank-num">06</span>
-                <img src="gmplayz.png" class="pfp">
-                <span class="name">Gmplayz_</span>
-            </div>
-            <div class="tier c">C</div>
-        </div>
-        <div class="row">
-            <div class="left">
-                <span class="rank-num">07</span>
-                <img src="Wraxiee_avatar_face (1).png" class="pfp">
-                <span class="name">Wraxiee</span>
-            </div>
-            <div class="tier c">C</div>
-        </div>
-        <div class="row">
-            <div class="left">
-                <span class="rank-num">08</span>
-                <img src="BetterSyco.png" class="pfp">
-                <span class="name">Bettersyco</span>
-            </div>
-            <div class="tier c">C</div>
-        </div>
-        <div class="row">
-            <div class="left">
-                <span class="rank-num">09</span>
-                <img src="samy3mk.png" class="pfp">
-                <span class="name">samy3mk</span>
-            </div>
-            <div class="tier d">D</div>
-        </div>
+        <div class="row"><div class="left"><span class="rank-num">01</span><img src="itzjohio.png" class="pfp"><span class="name">ItzJohio</span></div><div class="tier s">S</div></div>
+        <div class="row"><div class="left"><span class="rank-num">02</span><img src="mohamm3dJA.png" class="pfp"><span class="name">mohamm3dJA</span></div><div class="tier a">A</div></div>
+        <div class="row"><div class="left"><span class="rank-num">03</span><img src="WaterPlant.png" class="pfp"><span class="name">WaterPlant</span></div><div class="tier a">A</div></div>
+        <div class="row"><div class="left"><span class="rank-num">04</span><img src="mazotic.png" class="pfp"><span class="name">mazotic</span></div><div class="tier b">B</div></div>
+        <div class="row"><div class="left"><span class="rank-num">05</span><img src="MaxieX.png" class="pfp"><span class="name">MaxieX</span></div><div class="tier b">B</div></div>
+        <div class="row"><div class="left"><span class="rank-num">06</span><img src="gmplayz.png" class="pfp"><span class="name">Gmplayz_</span></div><div class="tier c">C</div></div>
+        <div class="row"><div class="left"><span class="rank-num">07</span><img src="Wraxiee_avatar_face (1).png" class="pfp"><span class="name">Wraxiee</span></div><div class="tier c">C</div></div>
+        <div class="row"><div class="left"><span class="rank-num">08</span><img src="BetterSyco.png" class="pfp"><span class="name">Bettersyco</span></div><div class="tier c">C</div></div>
+        <div class="row"><div class="left"><span class="rank-num">09</span><img src="samy3mk.png" class="pfp"><span class="name">samy3mk</span></div><div class="tier d">D</div></div>
     </div>
 
     <div id="pvp" class="tier-list">
-        <div class="row">
-            <div class="left">
-                <span class="rank-num">01</span>
-                <img src="mazotic.png" class="pfp">
-                <span class="name">mazotic</span>
-            </div>
-            <div class="tier s">S</div>
-        </div>
-        <div class="row">
-            <div class="left">
-                <span class="rank-num">02</span>
-                <img src="mohamm3dJA.png" class="pfp">
-                <span class="name">mohamm3dJA</span>
-            </div>
-            <div class="tier a">A</div>
-        </div>
-        <div class="row">
-            <div class="left">
-                <span class="rank-num">03</span>
-                <img src="WaterPlant.png" class="pfp">
-                <span class="name">WaterPlant</span>
-            </div>
-            <div class="tier a">A</div>
-        </div>
-        <div class="row">
-            <div class="left">
-                <span class="rank-num">04</span>
-                <img src="MaxieX.png" class="pfp">
-                <span class="name">MaxieX</span>
-            </div>
-            <div class="tier b">B</div>
-        </div>
-        <div class="row">
-            <div class="left">
-                <span class="rank-num">05</span>
-                <img src="samy3mk.png" class="pfp">
-                <span class="name">samy3mk</span>
-            </div>
-            <div class="tier b">B</div>
-        </div>
-        <div class="row">
-            <div class="left">
-                <span class="rank-num">06</span>
-                <img src="Wraxiee_avatar_face (1).png" class="pfp">
-                <span class="name">Wraxiee</span>
-            </div>
-            <div class="tier c">C</div>
-        </div>
-        <div class="row">
-            <div class="left">
-                <span class="rank-num">07</span>
-                <img src="gmplayz.png" class="pfp">
-                <span class="name">Gmplayz_</span>
-            </div>
-            <div class="tier c">C</div>
-        </div>
-        <div class="row">
-            <div class="left">
-                <span class="rank-num">08</span>
-                <img src="BetterSyco.png" class="pfp">
-                <span class="name">Bettersyco</span>
-            </div>
-            <div class="tier c">C</div>
-        </div>
-        <div class="row">
-            <div class="left">
-                <span class="rank-num">09</span>
-                <img src="itzjohio.png" class="pfp">
-                <span class="name">ItzJohio</span>
-            </div>
-            <div class="tier d">D</div>
-        </div>
+        <div class="row"><div class="left"><span class="rank-num">01</span><img src="mazotic.png" class="pfp"><span class="name">mazotic</span></div><div class="tier s">S</div></div>
+        <div class="row"><div class="left"><span class="rank-num">02</span><img src="mohamm3dJA.png" class="pfp"><span class="name">mohamm3dJA</span></div><div class="tier a">A</div></div>
+        <div class="row"><div class="left"><span class="rank-num">03</span><img src="WaterPlant.png" class="pfp"><span class="name">WaterPlant</span></div><div class="tier a">A</div></div>
+        <div class="row"><div class="left"><span class="rank-num">04</span><img src="MaxieX.png" class="pfp"><span class="name">MaxieX</span></div><div class="tier b">B</div></div>
+        <div class="row"><div class="left"><span class="rank-num">05</span><img src="samy3mk.png" class="pfp"><span class="name">samy3mk</span></div><div class="tier b">B</div></div>
+        <div class="row"><div class="left"><span class="rank-num">06</span><img src="Wraxiee_avatar_face (1).png" class="pfp"><span class="name">Wraxiee</span></div><div class="tier c">C</div></div>
+        <div class="row"><div class="left"><span class="rank-num">07</span><img src="gmplayz.png" class="pfp"><span class="name">Gmplayz_</span></div><div class="tier c">C</div></div>
+        <div class="row"><div class="left"><span class="rank-num">08</span><img src="BetterSyco.png" class="pfp"><span class="name">Bettersyco</span></div><div class="tier c">C</div></div>
+        <div class="row"><div class="left"><span class="rank-num">09</span><img src="itzjohio.png" class="pfp"><span class="name">ItzJohio</span></div><div class="tier d">D</div></div>
     </div>
 
     <div id="disciplines" class="tier-list">
@@ -416,27 +279,48 @@
             <div class="tier-card">
                 <div class="icon-box"><img src="sword_icon.png" alt="Sword"></div>
                 <span class="card-title">Sword</span>
-                <div class="player-entry"><span>mazotic</span><span class="tier s t-small">S</span></div>
-                <div class="player-entry"><span>mohamm3dJA</span><span class="tier a t-small">A</span></div>
+                <div class="player-entry"><span>mohamm3dJA</span><span class="tier lt4 t-small">LT4</span></div>
+                <div class="player-entry"><span>MaxieX</span><span class="tier lt4 t-small">LT4</span></div>
+                <div class="player-entry"><span>Wraxiee</span><span class="tier ht5 t-small">HT5</span></div>
+                <div class="player-entry"><span>Gmplayz_</span><span class="tier ht5 t-small">HT5</span></div>
+                <div class="player-entry"><span>Water</span><span class="tier lt5 t-small">LT5</span></div>
             </div>
 
             <div class="tier-card">
                 <div class="icon-box"><img src="axe_icon.png" alt="Axe"></div>
                 <span class="card-title">Axe</span>
-                <div class="player-entry"><span>itzjohio</span><span class="tier s t-small">S</span></div>
-                <div class="player-entry"><span>WaterPlant</span><span class="tier a t-small">A</span></div>
+                <div class="player-entry"><span>mohamm3dJA</span><span class="tier lt4 t-small">LT4</span></div>
             </div>
 
             <div class="tier-card">
                 <div class="icon-box"><img src="crystal_icon.png" alt="Crystal"></div>
                 <span class="card-title">Crystal</span>
-                <div class="player-entry"><span>MaxieX</span><span class="tier a t-small">A</span></div>
+                <div class="player-entry"><span>MaxieX</span><span class="tier ht5 t-small">HT5</span></div>
+                <div class="player-entry"><span>mohamm3dJA</span><span class="tier lt5 t-small">LT5</span></div>
             </div>
 
             <div class="tier-card">
-                <div class="icon-box"><img src="cart_icon.png" alt="Cart"></div>
-                <span class="card-title">Cart PvP</span>
-                <div class="player-entry"><span>mohamm3dJA</span><span class="tier s t-small">S</span></div>
+                <div class="icon-box"><img src="potion_icon.png" alt="Potion"></div>
+                <span class="card-title">Potion</span>
+                <div class="player-entry"><span>MaxieX</span><span class="tier ht5 t-small">HT5</span></div>
+                <div class="player-entry"><span>mohamm3dJA</span><span class="tier ht5 t-small">HT5</span></div>
+            </div>
+
+            <div class="tier-card">
+                <div class="icon-box"><img src="mace_icon.png" alt="Mace"></div>
+                <span class="card-title">Mace</span>
+                <div class="player-entry"><span>mohamm3dJA</span><span class="tier lt4 t-small">LT4</span></div>
+                <div class="player-entry"><span>MaxieX</span><span class="tier lt5 t-small">LT5</span></div>
+                <div class="player-entry"><span>Gmplayz_</span><span class="tier lt5 t-small">LT5</span></div>
+                <div class="player-entry"><span>Wraxiee</span><span class="tier lt5 t-small">LT5</span></div>
+            </div>
+
+            <div class="tier-card">
+                <div class="icon-box"><img src="smp_icon.png" alt="SMP"></div>
+                <span class="card-title">SMP</span>
+                <div class="player-entry"><span>mohamm3dJA</span><span class="tier lt4 t-small">LT4</span></div>
+                <div class="player-entry"><span>Wraxiee</span><span class="tier ht5 t-small">HT5</span></div>
+                <div class="player-entry"><span>MaxieX</span><span class="tier lt5 t-small">LT5</span></div>
             </div>
 
         </div>
@@ -446,24 +330,19 @@
 <script>
     function openTab(tabName) {
         var container = document.getElementById("mainContainer");
-        
-        // Make container wider for the grid view
         if(tabName === 'disciplines') {
             container.classList.add("wide");
         } else {
             container.classList.remove("wide");
         }
-
         var lists = document.getElementsByClassName("tier-list");
         for (var i = 0; i < lists.length; i++) {
             lists[i].classList.remove("active");
         }
-
         var buttons = document.getElementsByClassName("tab-btn");
         for (var i = 0; i < buttons.length; i++) {
             buttons[i].classList.remove("active");
         }
-
         document.getElementById(tabName).classList.add("active");
         event.currentTarget.classList.add("active");
     }
