@@ -44,6 +44,56 @@
 
         .container.wide { max-width: 850px; }
 
+        /* Top Navigation Buttons */
+        .top-nav {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+
+        .nav-icon-btn {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 15px;
+            padding: 10px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 50px;
+            height: 50px;
+        }
+
+        .nav-icon-btn img {
+            width: 24px;
+            height: 24px;
+            filter: brightness(0.8);
+            transition: all 0.3s ease;
+        }
+
+        .nav-icon-btn:hover {
+            background: rgba(255, 127, 255, 0.1);
+            border-color: rgba(255, 127, 255, 0.4);
+            transform: translateY(-2px);
+        }
+
+        .nav-icon-btn:hover img {
+            filter: brightness(1);
+            transform: scale(1.1);
+        }
+
+        .nav-icon-btn.disabled {
+            opacity: 0.4;
+            cursor: default;
+        }
+
+        .nav-icon-btn.disabled:hover {
+            transform: none;
+            border-color: rgba(255, 255, 255, 0.1);
+        }
+
         h1 {
             text-align: center;
             font-family: 'Outfit', sans-serif;
@@ -135,6 +185,13 @@
             color: #000; text-transform: uppercase;
         }
 
+        .discord-tag {
+            font-family: 'Inter', sans-serif;
+            font-size: 0.85rem;
+            color: #7289da;
+            font-weight: 600;
+        }
+
         /* GLOWING REGION TAGS */
         .region-tag {
             padding: 5px 12px;
@@ -146,23 +203,9 @@
             transition: 0.3s ease;
         }
 
-        .region-tag.as { 
-            background: #4dff88; 
-            color: #0c331a; 
-            box-shadow: 0 0 12px rgba(77, 255, 136, 0.4); 
-        }
-
-        .region-tag.eu { 
-            background: #4d94ff; 
-            color: white; 
-            box-shadow: 0 0 12px rgba(77, 148, 255, 0.4); 
-        }
-
-        .region-tag.na { 
-            background: #ff4d4d; 
-            color: white; 
-            box-shadow: 0 0 12px rgba(255, 77, 77, 0.4); 
-        }
+        .region-tag.as { background: #4dff88; color: #0c331a; box-shadow: 0 0 12px rgba(77, 255, 136, 0.4); }
+        .region-tag.eu { background: #4d94ff; color: white; box-shadow: 0 0 12px rgba(77, 148, 255, 0.4); }
+        .region-tag.na { background: #ff4d4d; color: white; box-shadow: 0 0 12px rgba(255, 77, 77, 0.4); }
 
         .tiers-grid {
             display: grid;
@@ -213,6 +256,18 @@
 <body>
 
 <div class="container" id="mainContainer">
+    <div class="top-nav">
+        <button class="nav-icon-btn" onclick="openTab('profile-list')" title="Profiles">
+            <img src="profiles.png" alt="Profiles">
+        </button>
+        <button class="nav-icon-btn disabled" title="Coming Soon">
+            <img src="Tripod.png" style="opacity: 0.5;">
+        </button>
+        <button class="nav-icon-btn disabled" title="Coming Soon">
+            <img src="Tripod.png" style="opacity: 0.5;">
+        </button>
+    </div>
+
     <h1>Tripod Tiers</h1>
 
     <div class="tabs">
@@ -222,6 +277,13 @@
         <button class="tab-btn" onclick="openTab('regions')">Regions</button>
     </div>
     
+    <div id="profile-list" class="tier-list">
+        <div class="row"><div class="left"><img src="mohamm3dJA.png" class="pfp"><span class="name">mohamm3dJA</span></div><div class="discord-tag">@mohamm3dJA</div></div>
+        <div class="row"><div class="left"><img src="itzjohio.png" class="pfp"><span class="name">ItzJohio</span></div><div class="discord-tag">@itzjohio</div></div>
+        <div class="row"><div class="left"><img src="WaterPlant.png" class="pfp"><span class="name">WaterPlant</span></div><div class="discord-tag">@waterplant</div></div>
+        <div class="row"><div class="left"><img src="mazotic.png" class="pfp"><span class="name">mazotic</span></div><div class="discord-tag">@mazotic</div></div>
+    </div>
+
     <div id="smp" class="tier-list active">
         <div class="row"><div class="left"><span class="rank-num">01</span><img src="itzjohio.png" class="pfp"><span class="name">ItzJohio</span></div><div class="tier s">S</div></div>
         <div class="row"><div class="left"><span class="rank-num">02</span><img src="mohamm3dJA.png" class="pfp"><span class="name">mohamm3dJA</span></div><div class="tier a">A</div></div>
@@ -352,7 +414,12 @@
             buttons[i].classList.remove("active");
         }
         document.getElementById(tabName).classList.add("active");
-        event.currentTarget.classList.add("active");
+        
+        // Only mark tab buttons as active if it's one of the main 4 tabs
+        if (event && event.currentTarget.classList.contains('tab-btn')) {
+            event.currentTarget.classList.add("active");
+        }
+        
         lenis.scrollTo(0, { immediate: true });
     }
 </script>
