@@ -128,13 +128,31 @@
         }
 
         .region-tag {
-            background: rgba(255, 255, 255, 0.1);
-            color: #aaa;
             padding: 5px 12px;
             border-radius: 10px;
             font-weight: 800;
             font-size: 0.8rem;
-            border: 1px solid rgba(255, 255, 255, 0.05);
+            text-transform: uppercase;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transition: 0.3s ease;
+        }
+
+        .region-tag.as { 
+            background: #4dff88; 
+            color: #0c331a; 
+            box-shadow: 0 0 12px rgba(77, 255, 136, 0.4); 
+        }
+
+        .region-tag.eu { 
+            background: #4d94ff; 
+            color: white; 
+            box-shadow: 0 0 12px rgba(77, 148, 255, 0.4); 
+        }
+
+        .region-tag.na { 
+            background: #ff4d4d; 
+            color: white; 
+            box-shadow: 0 0 12px rgba(255, 77, 77, 0.4); 
         }
 
         .tiers-grid {
