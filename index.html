@@ -35,14 +35,28 @@
             50% { background-position: 100% 50%; }
             100% { background-position: 0% 50%; }
         }
-
+@keyframes sectionFade {
+            from { 
+                opacity: 0; 
+                transform: translateY(10px); 
+            }
+            to { 
+                opacity: 1; 
+                transform: translateY(0); 
+            }
+        }
         .container {
             width: 100%;
             max-width: 600px;
-            transition: max-width 0.6s cubic-bezier(0.16, 1, 0.3, 1); /* Smoother container transition */
+            /* Smoother easing: quintic-out feels less "robotic" */
+            transition: max-width 0.7s cubic-bezier(0.23, 1, 0.32, 1);
+            will-change: max-width;
+            backface-visibility: hidden;
         }
 
-        .container.wide { max-width: 850px; }
+       .container.wide { 
+            max-width: 900px; /* Bumped slightly for better grid spacing */
+        }
 
         /* Top Navigation Buttons */
         .top-nav {
@@ -147,14 +161,15 @@
             display: none;
             flex-direction: column;
             gap: 12px;
-            animation: sectionFade 0.5s ease forwards;
+            opacity: 0;
+            /* Section doesn't just pop in, it slides slightly */
+            transform: translateY(5px);
         }
 
-        .tier-list.active { display: flex; }
-
-        @keyframes sectionFade {
-            from { opacity: 0; transform: translateY(10px); }
-            to { opacity: 1; transform: translateY(0); }
+        .tier-list.active { 
+            display: flex; 
+            animation: sectionFade 0.4s ease-out forwards;
+            animation-delay: 0.1s; /* Tiny delay so the container expands first */
         }
 
         .row {
