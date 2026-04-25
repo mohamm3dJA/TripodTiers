@@ -39,7 +39,7 @@
         .container {
             width: 100%;
             max-width: 600px;
-            transition: max-width 0.5s ease;
+            transition: max-width 0.6s cubic-bezier(0.16, 1, 0.3, 1); /* Smoother container transition */
         }
 
         .container.wide { max-width: 850px; }
@@ -52,63 +52,50 @@
             margin-bottom: 20px;
         }
 
-       .nav-icon-btn {
+        .nav-icon-btn {
             background: rgba(255, 255, 255, 0.05);
             border: 1px solid rgba(255, 255, 255, 0.1);
-            border-radius: 15px;
-            padding: 0; /* Removed padding so image can fill space */
+            border-radius: 18px;
             cursor: pointer;
-            transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
             display: flex;
             align-items: center;
             justify-content: center;
-            width: 60px;
-            height: 60px;
-            overflow: hidden; /* Keeps the image inside the rounded corners */
+            width: 65px; 
+            height: 65px;
+            padding: 0;
+            overflow: hidden;
+            outline: none;
+        }
+
+        /* The Glow Effect for Profiles */
+        .nav-icon-btn:hover {
+            background: rgba(255, 127, 255, 0.1);
+            border-color: rgba(255, 127, 255, 0.6);
+            box-shadow: 0 0 20px rgba(255, 127, 255, 0.3);
+            transform: translateY(-3px);
         }
 
         .nav-icon-btn img {
-            width: 60px;  /* Much bigger image */
-            height: 60px;
-            filter: brightness(0.9);
+            width: 45px; 
+            height: 45px;
+            filter: brightness(0.8);
             transition: all 0.3s ease;
             object-fit: contain;
         }
 
         .nav-icon-btn:hover img {
-            filter: brightness(1);
-            transform: scale(1.15); /* Gives it a nice zoom effect on hover */
-        }
-
-        .nav-icon-btn {
-            background: rgba(255, 255, 255, 0.05);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            border-radius: 18px; /* Slightly rounder for the bigger size */
-            padding: 10px;
-            cursor: pointer;
-            transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            width: 60px;  /* Increased from 50px */
-            height: 60px; /* Increased from 50px */
-        }
-
-        .nav-icon-btn img {
-            width: 32px;  /* Increased from 24px */
-            height: 32px; /* Increased from 24px */
-            filter: brightness(0.8);
-            transition: all 0.3s ease;
+            filter: brightness(1.2);
+            transform: scale(1.1);
         }
 
         .nav-icon-btn.disabled {
-            opacity: 0.4;
+            opacity: 0.3;
             cursor: default;
-        }
-
-        .nav-icon-btn.disabled:hover {
-            transform: none;
-            border-color: rgba(255, 255, 255, 0.1);
+            box-shadow: none !important;
+            transform: none !important;
+            background: rgba(255, 255, 255, 0.05) !important;
+            border-color: rgba(255, 255, 255, 0.1) !important;
         }
 
         h1 {
@@ -170,7 +157,6 @@
             to { opacity: 1; transform: translateY(0); }
         }
 
-        /* UNIVERSAL ROW HOVER ZOOM */
         .row {
             background: rgba(21, 21, 27, 0.8);
             backdrop-filter: blur(10px);
@@ -209,7 +195,6 @@
             font-weight: 600;
         }
 
-        /* GLOWING REGION TAGS */
         .region-tag {
             padding: 5px 12px;
             border-radius: 10px;
