@@ -1,30 +1,359 @@
-<style>
-    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;700&family=Outfit:wght@500;800&display=swap');
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Tripod Tiers</title>
+    <link rel="icon" type="image/png" href="Tripod.png">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;700&family=Outfit:wght@500;800&display=swap');
 
-    html {
-        scroll-behavior: smooth;
+        html {
+            scroll-behavior: smooth;
+        }
+
+        /* Lenis Recommended CSS */
+        html.lenis { height: auto; }
+        .lenis.lenis-smooth { scroll-behavior: auto !important; }
+        .lenis.lenis-smooth [data-lenis-prevent] { overscroll-behavior: contain; }
+        .lenis.lenis-stopped { overflow: hidden; }
+
+        body {
+            background: linear-gradient(-45deg, #0b0b0e, #1a1a24, #0b0b0e, #12121a);
+            background-size: 400% 400%;
+            animation: gradientBG 15s ease infinite;
+            color: white;
+            font-family: 'Inter', sans-serif;
+            display: flex;
+            justify-content: center;
+            padding: 40px 20px;
+            margin: 0;
+            min-height: 150vh;
+        }
+
+        @keyframes gradientBG {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        .container {
+            width: 100%;
+            max-width: 600px;
+            transition: max-width 0.5s ease;
+        }
+
+        .container.wide { max-width: 850px; }
+
+        h1 {
+            text-align: center;
+            font-family: 'Outfit', sans-serif;
+            font-weight: 800;
+            margin-bottom: 10px;
+            color: #efefff;
+            font-size: 2.5rem;
+        }
+
+        .tabs {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-bottom: 30px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            padding-bottom: 10px;
+            flex-wrap: wrap;
+        }
+
+        .tab-btn {
+            background: none;
+            border: none;
+            color: #777;
+            font-family: 'Outfit', sans-serif;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+            padding: 5px 15px;
+        }
+
+        .tab-btn.active { color: #fff; }
+        .tab-btn.active::after {
+            content: '';
+            position: absolute;
+            bottom: -11px;
+            left: 0;
+            width: 100%;
+            height: 3px;
+            background: #ff7fff;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(255, 127, 255, 0.5);
+        }
+
+        .tier-list {
+            display: none;
+            flex-direction: column;
+            gap: 12px;
+            animation: sectionFade 0.5s ease forwards;
+        }
+
+        .tier-list.active { display: flex; }
+
+        @keyframes sectionFade {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* UNIVERSAL ROW HOVER ZOOM */
+        .row {
+            background: rgba(21, 21, 27, 0.8);
+            backdrop-filter: blur(10px);
+            border: 1px solid #26262e;
+            border-radius: 25px;
+            padding: 12px 20px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            cursor: pointer;
+        }
+
+        .row:hover {
+            transform: scale(1.02);
+            border-color: rgba(255, 127, 255, 0.4); 
+            background: rgba(30, 30, 40, 0.9);
+        }
+
+        .left { display: flex; align-items: center; gap: 15px; }
+        .rank-num { font-weight: 900; color: #444; width: 25px; font-size: 0.9rem; }
+        .pfp { width: 48px; height: 48px; border-radius: 50%; border: 2px solid #26262e; object-fit: cover; background: #222; }
+        .name { font-weight: 700; font-size: 1.1rem; font-family: 'Outfit', sans-serif; }
+        
+        .tier {
+            width: 38px; height: 38px;
+            display: flex; align-items: center; justify-content: center;
+            border-radius: 14px; font-weight: 900; font-size: 0.85rem;
+            color: #000; text-transform: uppercase;
+        }
+
+        /* GLOWING REGION TAGS */
+        .region-tag {
+            padding: 5px 12px;
+            border-radius: 10px;
+            font-weight: 800;
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transition: 0.3s ease;
+        }
+
+        .region-tag.as { 
+            background: #4dff88; 
+            color: #0c331a; 
+            box-shadow: 0 0 12px rgba(77, 255, 136, 0.4); 
+        }
+
+        .region-tag.eu { 
+            background: #4d94ff; 
+            color: white; 
+            box-shadow: 0 0 12px rgba(77, 148, 255, 0.4); 
+        }
+
+        .region-tag.na { 
+            background: #ff4d4d; 
+            color: white; 
+            box-shadow: 0 0 12px rgba(255, 77, 77, 0.4); 
+        }
+
+        .tiers-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 20px;
+            width: 100%;
+        }
+
+        .tier-card {
+            background: rgba(21, 21, 27, 0.8);
+            backdrop-filter: blur(10px);
+            border: 1px solid #26262e;
+            border-radius: 24px;
+            padding: 25px;
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+
+        .tier-card:hover { border-color: #ff7fff; transform: translateY(-5px); }
+
+        .icon-box {
+            width: 70px; height: 70px;
+            margin: 0 auto 10px;
+            display: flex; align-items: center; justify-content: center;
+        }
+
+        .icon-box img { max-width: 55px; max-height: 55px; object-fit: contain; }
+        .card-title { font-family: 'Outfit', sans-serif; font-weight: 800; font-size: 1.3rem; margin-bottom: 20px; display: block; }
+
+        .player-entry {
+            display: flex; justify-content: space-between; align-items: center;
+            background: rgba(0, 0, 0, 0.25);
+            padding: 10px 15px; border-radius: 12px; margin-bottom: 8px; font-size: 0.95rem;
+        }
+
+        .lt4 { background: #ff7fff; box-shadow: 0 0 10px rgba(255, 127, 255, 0.3); }
+        .ht5 { background: #ff4d4d; color: white; box-shadow: 0 0 10px rgba(255, 77, 77, 0.3); }
+        .lt5 { background: #ffaa42; box-shadow: 0 0 10px rgba(255, 170, 66, 0.3); }
+        .s { background: #ff7fff; }
+        .a { background: #ff4d4d; color: white; }
+        .b { background: #ffaa42; }
+        .c { background: #ffdf5d; }
+        .d { background: #5dff8a; }
+
+        .t-small { font-weight: 900; padding: 2px 8px; border-radius: 6px; font-size: 0.75rem; width: auto; height: auto; }
+    </style>
+</head>
+<body>
+
+<div class="container" id="mainContainer">
+    <h1>Tripod Tiers</h1>
+
+    <div class="tabs">
+        <button class="tab-btn active" onclick="openTab('smp')">SMP</button>
+        <button class="tab-btn" onclick="openTab('pvp')">PvP</button>
+        <button class="tab-btn" onclick="openTab('disciplines')">Tiers</button>
+        <button class="tab-btn" onclick="openTab('regions')">Regions</button>
+    </div>
+    
+    <div id="smp" class="tier-list active">
+        <div class="row"><div class="left"><span class="rank-num">01</span><img src="itzjohio.png" class="pfp"><span class="name">ItzJohio</span></div><div class="tier s">S</div></div>
+        <div class="row"><div class="left"><span class="rank-num">02</span><img src="mohamm3dJA.png" class="pfp"><span class="name">mohamm3dJA</span></div><div class="tier a">A</div></div>
+        <div class="row"><div class="left"><span class="rank-num">03</span><img src="WaterPlant.png" class="pfp"><span class="name">WaterPlant</span></div><div class="tier a">A</div></div>
+        <div class="row"><div class="left"><span class="rank-num">04</span><img src="mazotic.png" class="pfp"><span class="name">mazotic</span></div><div class="tier b">B</div></div>
+        <div class="row"><div class="left"><span class="rank-num">05</span><img src="gmplayz.png" class="pfp"><span class="name">Gmplayz_</span></div><div class="tier b">B</div></div>
+        <div class="row"><div class="left"><span class="rank-num">06</span><img src="MaxieX.png" class="pfp"><span class="name">MaxieX</span></div><div class="tier b">B</div></div>
+        <div class="row"><div class="left"><span class="rank-num">07</span><img src="Wraxiee_avatar_face (1).png" class="pfp"><span class="name">Wraxiee</span></div><div class="tier c">C</div></div>
+        <div class="row"><div class="left"><span class="rank-num">08</span><img src="BetterSyco.png" class="pfp"><span class="name">Bettersyco</span></div><div class="tier c">C</div></div>
+        <div class="row"><div class="left"><span class="rank-num">09</span><img src="samy3mk.png" class="pfp"><span class="name">samy3mk</span></div><div class="tier d">D</div></div>
+        <div class="row"><div class="left"><span class="rank-num">10</span><img src="Rudepoem.png" class="pfp"><span class="name">RudePoem</span></div><div class="tier d">D</div></div>
+    </div>
+
+    <div id="pvp" class="tier-list">
+        <div class="row"><div class="left"><span class="rank-num">01</span><img src="mazotic.png" class="pfp"><span class="name">mazotic</span></div><div class="tier s">S</div></div>
+        <div class="row"><div class="left"><span class="rank-num">02</span><img src="mohamm3dJA.png" class="pfp"><span class="name">mohamm3dJA</span></div><div class="tier a">A</div></div>
+        <div class="row"><div class="left"><span class="rank-num">03</span><img src="WaterPlant.png" class="pfp"><span class="name">WaterPlant</span></div><div class="tier a">A</div></div>
+        <div class="row"><div class="left"><span class="rank-num">04</span><img src="MaxieX.png" class="pfp"><span class="name">MaxieX</span></div><div class="tier b">B</div></div>
+        <div class="row"><div class="left"><span class="rank-num">05</span><img src="samy3mk.png" class="pfp"><span class="name">samy3mk</span></div><div class="tier b">B</div></div>
+        <div class="row"><div class="left"><span class="rank-num">06</span><img src="Wraxiee_avatar_face (1).png" class="pfp"><span class="name">Wraxiee</span></div><div class="tier c">C</div></div>
+        <div class="row"><div class="left"><span class="rank-num">07</span><img src="gmplayz.png" class="pfp"><span class="name">Gmplayz_</span></div><div class="tier c">C</div></div>
+        <div class="row"><div class="left"><span class="rank-num">08</span><img src="BetterSyco.png" class="pfp"><span class="name">Bettersyco</span></div><div class="tier c">C</div></div>
+        <div class="row"><div class="left"><span class="rank-num">09</span><img src="itzjohio.png" class="pfp"><span class="name">ItzJohio</span></div><div class="tier d">D</div></div>
+    </div>
+
+    <div id="disciplines" class="tier-list">
+        <div class="tiers-grid">
+            <div class="tier-card">
+                <div class="icon-box"><img src="sword.png" alt="Sword"></div>
+                <span class="card-title">Sword</span>
+                <div class="player-entry"><span>mohamm3dJA</span><span class="tier lt4 t-small">LT4</span></div>
+                <div class="player-entry"><span>MaxieX</span><span class="tier lt4 t-small">LT4</span></div>
+                <div class="player-entry"><span>Wraxiee</span><span class="tier ht5 t-small">HT5</span></div>
+                <div class="player-entry"><span>Gmplayz_</span><span class="tier ht5 t-small">HT5</span></div>
+                <div class="player-entry"><span>WaterPlant</span><span class="tier lt5 t-small">LT5</span></div>
+            </div>
+            <div class="tier-card">
+                <div class="icon-box"><img src="axe.png" alt="Axe"></div>
+                <span class="card-title">Axe</span>
+                <div class="player-entry"><span>mohamm3dJA</span><span class="tier lt4 t-small">LT4</span></div>
+            </div>
+            <div class="tier-card">
+                <div class="icon-box"><img src="crystal.png" alt="Crystal"></div>
+                <span class="card-title">Crystal</span>
+                <div class="player-entry"><span>MaxieX</span><span class="tier ht5 t-small">HT5</span></div>
+                <div class="player-entry"><span>mohamm3dJA</span><span class="tier lt5 t-small">LT5</span></div>
+            </div>
+            <div class="tier-card">
+                <div class="icon-box"><img src="potion.png" alt="Potion"></div>
+                <span class="card-title">Potion</span>
+                <div class="player-entry"><span>MaxieX</span><span class="tier ht5 t-small">HT5</span></div>
+                <div class="player-entry"><span>mohamm3dJA</span><span class="tier ht5 t-small">HT5</span></div>
+            </div>
+            <div class="tier-card">
+                <div class="icon-box"><img src="mace.png" alt="Mace"></div>
+                <span class="card-title">Mace</span>
+                <div class="player-entry"><span>mohamm3dJA</span><span class="tier lt4 t-small">LT4</span></div>
+                <div class="player-entry"><span>MaxieX</span><span class="tier lt5 t-small">LT5</span></div>
+                <div class="player-entry"><span>Gmplayz_</span><span class="tier lt5 t-small">LT5</span></div>
+            </div>
+            <div class="tier-card">
+                <div class="icon-box"><img src="smp.png" alt="SMP"></div>
+                <span class="card-title">SMP</span>
+                <div class="player-entry"><span>mohamm3dJA</span><span class="tier lt4 t-small">LT4</span></div>
+                <div class="player-entry"><span>Wraxiee</span><span class="tier ht5 t-small">HT5</span></div>
+                <div class="player-entry"><span>MaxieX</span><span class="tier lt5 t-small">LT5</span></div>
+            </div>
+            <div class="tier-card">
+                <div class="icon-box"><img src="diasmp.png" alt="Diamond SMP"></div>
+                <span class="card-title">Diamond SMP</span>
+                <div class="player-entry"><span>MaxieX</span><span class="tier ht5 t-small">HT5</span></div>
+            </div>
+            <div class="tier-card">
+                <div class="icon-box"><img src="uhc.png" alt="UHC"></div>
+                <span class="card-title">UHC</span>
+                <div class="player-entry"><span>MaxieX</span><span class="tier lt5 t-small">LT5</span></div>
+            </div>
+            <div class="tier-card">
+                <div class="icon-box"><img src="nethpot.png" alt="Netherite Pot"></div>
+                <span class="card-title">Netherite Pot</span>
+                <div class="player-entry"><span>Wraxiee</span><span class="tier ht5 t-small">HT5</span></div>
+                <div class="player-entry"><span>mohamm3dJA</span><span class="tier lt5 t-small">LT5</span></div>
+                <div class="player-entry"><span>MaxieX</span><span class="tier lt5 t-small">LT5</span></div>
+            </div>
+        </div>
+    </div>
+
+    <div id="regions" class="tier-list">
+        <div class="row"><div class="left"><img src="mohamm3dJA.png" class="pfp"><span class="name">mohamm3dJA</span></div><div class="region-tag as">AS</div></div>
+        <div class="row"><div class="left"><img src="itzjohio.png" class="pfp"><span class="name">ItzJohio</span></div><div class="region-tag eu">EU</div></div>
+        <div class="row"><div class="left"><img src="WaterPlant.png" class="pfp"><span class="name">WaterPlant</span></div><div class="region-tag eu">EU</div></div>
+        <div class="row"><div class="left"><img src="mazotic.png" class="pfp"><span class="name">mazotic</span></div><div class="region-tag as">AS</div></div>
+        <div class="row"><div class="left"><img src="MaxieX.png" class="pfp"><span class="name">MaxieX</span></div><div class="region-tag na">NA</div></div>
+        <div class="row"><div class="left"><img src="gmplayz.png" class="pfp"><span class="name">Gmplayz_</span></div><div class="region-tag eu">EU</div></div>
+        <div class="row"><div class="left"><img src="Wraxiee_avatar_face (1).png" class="pfp"><span class="name">Wraxiee</span></div><div class="region-tag eu">EU</div></div>
+        <div class="row"><div class="left"><img src="BetterSyco.png" class="pfp"><span class="name">Bettersyco</span></div><div class="region-tag eu">EU</div></div>
+        <div class="row"><div class="left"><img src="samy3mk.png" class="pfp"><span class="name">samy3mk</span></div><div class="region-tag as">AS</div></div>
+    </div>
+</div>
+
+<script src="https://unpkg.com/lenis@1.1.18/dist/lenis.min.js"></script>
+<script>
+    const lenis = new Lenis({
+      duration: 1.2,
+      easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+      smooth: true,
+    })
+    function raf(time) {
+      lenis.raf(time)
+      requestAnimationFrame(raf)
     }
+    requestAnimationFrame(raf)
 
-    /* Standard Row Styling */
-    .row {
-        background: rgba(21, 21, 27, 0.8);
-        backdrop-filter: blur(10px);
-        border: 1px solid #26262e;
-        border-radius: 25px;
-        padding: 12px 20px;
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-        cursor: pointer;
+    function openTab(tabName) {
+        var container = document.getElementById("mainContainer");
+        if(tabName === 'disciplines') {
+            container.classList.add("wide");
+        } else {
+            container.classList.remove("wide");
+        }
+        var lists = document.getElementsByClassName("tier-list");
+        for (var i = 0; i < lists.length; i++) {
+            lists[i].classList.remove("active");
+        }
+        var buttons = document.getElementsByClassName("tab-btn");
+        for (var i = 0; i < buttons.length; i++) {
+            buttons[i].classList.remove("active");
+        }
+        document.getElementById(tabName).classList.add("active");
+        event.currentTarget.classList.add("active");
+        lenis.scrollTo(0, { immediate: true });
     }
-
-    /* Hover Effect for all Rows */
-    .row:hover {
-        transform: scale(1.02);
-        border-color: rgba(255, 127, 255, 0.4); 
-        background: rgba(30, 30, 40, 0.9);
-    }
-
-    /* The rest of your CSS (body, container, region-tags, etc.) goes here... */
-</style>
+</script>
+</body>
+</html>
