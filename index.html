@@ -8,17 +8,11 @@
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;700&family=Outfit:wght@500;800&display=swap');
 
-        /* Smooth Scroll behavior for standard scrolling */
-        html {
-            scroll-behavior: smooth;
-        }
-
-        /* Lenis Recommended CSS */
+        html { scroll-behavior: smooth; }
         html.lenis, html.lenis body { height: auto; }
         .lenis.lenis-smooth { scroll-behavior: auto !important; }
         .lenis.lenis-smooth [data-lenis-prevent] { overscroll-behavior: contain; }
         .lenis.lenis-stopped { overflow: hidden; }
-        .lenis.lenis-scrolling iframe { pointer-events: none; }
 
         body {
             background: linear-gradient(-45deg, #0b0b0e, #1a1a24, #0b0b0e, #12121a);
@@ -51,7 +45,7 @@
             will-change: max-width;
         }
 
-        .container.wide { max-width: 1000px; }
+        .container.wide { max-width: 1100px; }
 
         .top-nav {
             display: flex;
@@ -80,21 +74,16 @@
             transform: translateY(-3px);
         }
 
-        .nav-icon-btn img {
-            width: 45px; height: 45px;
-            filter: brightness(0.8);
-            transition: 0.3s ease;
-        }
-
+        .nav-icon-btn img { width: 45px; height: 45px; transition: 0.3s ease; }
         .nav-icon-btn.disabled { opacity: 0.3; cursor: not-allowed; }
 
         h1 {
             text-align: center;
             font-family: 'Outfit', sans-serif;
             font-weight: 800;
-            margin-bottom: 10px;
             color: #efefff;
             font-size: 2.5rem;
+            margin-bottom: 20px;
         }
 
         .tabs {
@@ -104,6 +93,7 @@
             margin-bottom: 30px;
             border-bottom: 1px solid rgba(255, 255, 255, 0.1);
             padding-bottom: 10px;
+            flex-wrap: wrap;
         }
 
         .tab-btn {
@@ -133,10 +123,7 @@
         }
 
         .tier-list { display: none; flex-direction: column; gap: 12px; }
-        .tier-list.active { 
-            display: flex; 
-            animation: sectionFade 0.4s ease-out forwards;
-        }
+        .tier-list.active { display: flex; animation: sectionFade 0.4s ease-out forwards; }
 
         .row {
             background: rgba(21, 21, 27, 0.8);
@@ -150,21 +137,16 @@
             transition: 0.3s ease;
         }
 
-        .row:hover {
-            transform: scale(1.02);
-            border-color: rgba(255, 127, 255, 0.4);
-        }
+        .row:hover { transform: scale(1.02); border-color: rgba(255, 127, 255, 0.4); }
 
         .left { display: flex; align-items: center; gap: 15px; }
-        .pfp { width: 48px; height: 48px; border-radius: 50%; border: 2px solid #26262e; background: #222; }
+        .rank-num { font-weight: 900; color: #444; width: 25px; font-size: 0.9rem; }
+        .pfp { width: 48px; height: 48px; border-radius: 50%; border: 2px solid #26262e; object-fit: cover; background: #222; }
         .name { font-weight: 700; font-family: 'Outfit', sans-serif; }
         
-        /* Tiers */
         .tier {
-            width: 38px; height: 38px;
-            display: flex; align-items: center; justify-content: center;
-            border-radius: 12px; font-weight: 900; font-size: 0.85rem;
-            color: #000;
+            width: 38px; height: 38px; display: flex; align-items: center; justify-content: center;
+            border-radius: 14px; font-weight: 900; font-size: 0.85rem; color: #000;
         }
 
         .s { background: #ff7fff; }
@@ -176,39 +158,19 @@
         .lt4 { background: #ff7fff; }
         .ht5 { background: #ff4d4d; color: white; }
         .lt5 { background: #ffaa42; }
-
         .t-small { font-weight: 900; padding: 2px 8px; border-radius: 6px; font-size: 0.75rem; width: auto; height: auto; }
 
-        /* Grid for Disciplines */
-        .tiers-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 20px;
-            width: 100%;
-        }
+        .discord-tag { font-family: 'Inter', sans-serif; font-size: 0.85rem; color: #7289da; font-weight: 600; }
 
-        .tier-card {
-            background: rgba(21, 21, 27, 0.8);
-            border: 1px solid #26262e;
-            border-radius: 24px;
-            padding: 20px;
-            transition: 0.3s ease;
-        }
-
-        .player-entry {
-            display: flex; justify-content: space-between; align-items: center;
-            background: rgba(0, 0, 0, 0.2);
-            padding: 8px 12px; border-radius: 10px; margin-bottom: 6px;
-        }
-
-        .region-tag {
-            padding: 5px 12px; border-radius: 10px; font-weight: 800; font-size: 0.8rem;
-        }
+        .region-tag { padding: 5px 12px; border-radius: 10px; font-weight: 800; font-size: 0.8rem; text-transform: uppercase; }
         .as { background: #4dff88; color: #0c331a; }
         .eu { background: #4d94ff; color: white; }
         .na { background: #ff4d4d; color: white; }
 
-        .discord-tag { color: #7289da; font-size: 0.85rem; font-weight: 600; }
+        .tiers-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 20px; width: 100%; }
+        .tier-card { background: rgba(21, 21, 27, 0.8); border: 1px solid #26262e; border-radius: 24px; padding: 25px; transition: 0.3s ease; }
+        .card-title { font-family: 'Outfit', sans-serif; font-weight: 800; font-size: 1.3rem; margin-bottom: 20px; display: block; text-align: center; }
+        .player-entry { display: flex; justify-content: space-between; align-items: center; background: rgba(0, 0, 0, 0.25); padding: 10px 15px; border-radius: 12px; margin-bottom: 8px; font-size: 0.95rem; }
     </style>
 </head>
 <body>
@@ -218,12 +180,8 @@
         <button class="nav-icon-btn" onclick="openTab('profile-list')" title="Profiles">
             <img src="profiles.png" alt="Profiles">
         </button>
-        <button class="nav-icon-btn disabled" title="Coming Soon">
-            <img src="Tripod.png" style="opacity: 0.5;">
-        </button>
-        <button class="nav-icon-btn disabled" title="Coming Soon">
-            <img src="Tripod.png" style="opacity: 0.5;">
-        </button>
+        <button class="nav-icon-btn disabled"><img src="Tripod.png" style="opacity: 0.5;"></button>
+        <button class="nav-icon-btn disabled"><img src="Tripod.png" style="opacity: 0.5;"></button>
     </div>
 
     <h1>Tripod Tiers</h1>
@@ -235,72 +193,131 @@
         <button class="tab-btn" onclick="openTab('regions')">Regions</button>
     </div>
     
-    <!-- Tab Contents -->
+    <!-- PROFILES -->
     <div id="profile-list" class="tier-list">
-        <!-- List remains same -->
         <div class="row"><div class="left"><img src="mohamm3d.png" class="pfp"><span class="name">mohamm3dJA</span></div><div class="discord-tag">@mohamm3d</div></div>
         <div class="row"><div class="left"><img src="johio747.png" class="pfp"><span class="name">ItzJohio</span></div><div class="discord-tag">@johio_747</div></div>
         <div class="row"><div class="left"><img src="onb.fr.png" class="pfp"><span class="name">WaterPlant</span></div><div class="discord-tag">@onb.fr</div></div>
+        <div class="row"><div class="left"><img src="mazinzzer.png" class="pfp"><span class="name">mazotic</span></div><div class="discord-tag">@mazinzzer</div></div>
+        <div class="row"><div class="left"><img src="yoboysam1.png" class="pfp"><span class="name">samy3mk</span></div><div class="discord-tag">@yoboysam1</div></div>
+        <div class="row"><div class="left"><img src="308oz.png" class="pfp"><span class="name">Rude_Poem</span></div><div class="discord-tag">@308oz</div></div>
+        <div class="row"><div class="left"><img src="maxyplays.png" class="pfp"><span class="name">MaxieX</span></div><div class="discord-tag">@maxyplays</div></div>
+        <div class="row"><div class="left"><img src="evansama.png" class="pfp"><span class="name">Gmplayz_</span></div><div class="discord-tag">@evansama.</div></div>
+        <div class="row"><div class="left"><img src="wraxie.png" class="pfp"><span class="name">Wraxiee</span></div><div class="discord-tag">@wraxie</div></div>
     </div>
 
+    <!-- SMP -->
     <div id="smp" class="tier-list active">
-        <div class="row"><div class="left"><img src="itzjohio.png" class="pfp"><span class="name">ItzJohio</span></div><div class="tier s">S</div></div>
-        <div class="row"><div class="left"><img src="mohamm3dJA.png" class="pfp"><span class="name">mohamm3dJA</span></div><div class="tier a">A</div></div>
+        <div class="row"><div class="left"><span class="rank-num">01</span><img src="itzjohio.png" class="pfp"><span class="name">ItzJohio</span></div><div class="tier s">S</div></div>
+        <div class="row"><div class="left"><span class="rank-num">02</span><img src="mohamm3dJA.png" class="pfp"><span class="name">mohamm3dJA</span></div><div class="tier a">A</div></div>
+        <div class="row"><div class="left"><span class="rank-num">03</span><img src="WaterPlant.png" class="pfp"><span class="name">WaterPlant</span></div><div class="tier a">A</div></div>
+        <div class="row"><div class="left"><span class="rank-num">04</span><img src="mazotic.png" class="pfp"><span class="name">mazotic</span></div><div class="tier b">B</div></div>
+        <div class="row"><div class="left"><span class="rank-num">05</span><img src="gmplayz.png" class="pfp"><span class="name">Gmplayz_</span></div><div class="tier b">B</div></div>
+        <div class="row"><div class="left"><span class="rank-num">06</span><img src="MaxieX.png" class="pfp"><span class="name">MaxieX</span></div><div class="tier b">B</div></div>
+        <div class="row"><div class="left"><span class="rank-num">07</span><img src="Wraxiee_avatar_face (1).png" class="pfp"><span class="name">Wraxiee</span></div><div class="tier c">C</div></div>
+        <div class="row"><div class="left"><span class="rank-num">08</span><img src="BetterSyco.png" class="pfp"><span class="name">Bettersyco</span></div><div class="tier c">C</div></div>
+        <div class="row"><div class="left"><span class="rank-num">09</span><img src="samy3mk.png" class="pfp"><span class="name">samy3mk</span></div><div class="tier d">D</div></div>
+        <div class="row"><div class="left"><span class="rank-num">10</span><img src="Rudepoem.png" class="pfp"><span class="name">Rude_Poem</span></div><div class="tier d">D</div></div>
     </div>
 
+    <!-- PVP -->
+    <div id="pvp" class="tier-list">
+        <div class="row"><div class="left"><span class="rank-num">01</span><img src="mazotic.png" class="pfp"><span class="name">mazotic</span></div><div class="tier s">S</div></div>
+        <div class="row"><div class="left"><span class="rank-num">02</span><img src="mohamm3dJA.png" class="pfp"><span class="name">mohamm3dJA</span></div><div class="tier a">A</div></div>
+        <div class="row"><div class="left"><span class="rank-num">03</span><img src="WaterPlant.png" class="pfp"><span class="name">WaterPlant</span></div><div class="tier a">A</div></div>
+        <div class="row"><div class="left"><span class="rank-num">04</span><img src="MaxieX.png" class="pfp"><span class="name">MaxieX</span></div><div class="tier b">B</div></div>
+        <div class="row"><div class="left"><span class="rank-num">05</span><img src="samy3mk.png" class="pfp"><span class="name">samy3mk</span></div><div class="tier b">B</div></div>
+        <div class="row"><div class="left"><span class="rank-num">06</span><img src="Wraxiee_avatar_face (1).png" class="pfp"><span class="name">Wraxiee</span></div><div class="tier c">C</div></div>
+        <div class="row"><div class="left"><span class="rank-num">07</span><img src="gmplayz.png" class="pfp"><span class="name">Gmplayz_</span></div><div class="tier c">C</div></div>
+        <div class="row"><div class="left"><span class="rank-num">08</span><img src="BetterSyco.png" class="pfp"><span class="name">Bettersyco</span></div><div class="tier c">C</div></div>
+        <div class="row"><div class="left"><span class="rank-num">09</span><img src="itzjohio.png" class="pfp"><span class="name">ItzJohio</span></div><div class="tier d">D</div></div>
+    </div>
+
+    <!-- DISCIPLINES (TIERS) -->
     <div id="disciplines" class="tier-list">
         <div class="tiers-grid">
             <div class="tier-card">
-                <span class="name" style="display:block; margin-bottom:15px; text-align:center; font-size:1.3rem;">Sword</span>
+                <span class="card-title">Sword</span>
                 <div class="player-entry"><span>mohamm3dJA</span><span class="tier lt4 t-small">LT4</span></div>
-                <!-- Updated Gmplayz_ to LT4 here -->
                 <div class="player-entry"><span>Gmplayz_</span><span class="tier lt4 t-small">LT4</span></div>
                 <div class="player-entry"><span>MaxieX</span><span class="tier lt4 t-small">LT4</span></div>
                 <div class="player-entry"><span>Wraxiee</span><span class="tier ht5 t-small">HT5</span></div>
                 <div class="player-entry"><span>WaterPlant</span><span class="tier lt5 t-small">LT5</span></div>
             </div>
-            <!-- Other cards... -->
+            <div class="tier-card">
+                <span class="card-title">Axe</span>
+                <div class="player-entry"><span>mohamm3dJA</span><span class="tier lt4 t-small">LT4</span></div>
+            </div>
+            <div class="tier-card">
+                <span class="card-title">Crystal</span>
+                <div class="player-entry"><span>MaxieX</span><span class="tier ht5 t-small">HT5</span></div>
+                <div class="player-entry"><span>mohamm3dJA</span><span class="tier ht5 t-small">HT5</span></div>
+            </div>
+            <div class="tier-card">
+                <span class="card-title">Potion</span>
+                <div class="player-entry"><span>MaxieX</span><span class="tier ht5 t-small">HT5</span></div>
+                <div class="player-entry"><span>mohamm3dJA</span><span class="tier ht5 t-small">HT5</span></div>
+            </div>
+            <div class="tier-card">
+                <span class="card-title">Mace</span>
+                <div class="player-entry"><span>mohamm3dJA</span><span class="tier lt4 t-small">LT4</span></div>
+                <div class="player-entry"><span>MaxieX</span><span class="tier lt5 t-small">LT5</span></div>
+                <div class="player-entry"><span>Gmplayz_</span><span class="tier lt5 t-small">LT5</span></div>
+            </div>
+            <div class="tier-card">
+                <span class="card-title">SMP Kit</span>
+                <div class="player-entry"><span>mohamm3dJA</span><span class="tier lt4 t-small">LT4</span></div>
+                <div class="player-entry"><span>Wraxiee</span><span class="tier ht5 t-small">HT5</span></div>
+                <div class="player-entry"><span>MaxieX</span><span class="tier lt5 t-small">LT5</span></div>
+            </div>
+            <div class="tier-card">
+                <span class="card-title">Diamond SMP</span>
+                <div class="player-entry"><span>MaxieX</span><span class="tier ht5 t-small">HT5</span></div>
+            </div>
+            <div class="tier-card">
+                <span class="card-title">Netherite Pot</span>
+                <div class="player-entry"><span>Wraxiee</span><span class="tier ht5 t-small">HT5</span></div>
+                <div class="player-entry"><span>mohamm3dJA</span><span class="tier lt5 t-small">LT5</span></div>
+                <div class="player-entry"><span>MaxieX</span><span class="tier lt5 t-small">LT5</span></div>
+            </div>
         </div>
     </div>
 
+    <!-- REGIONS -->
     <div id="regions" class="tier-list">
         <div class="row"><div class="left"><img src="mohamm3dJA.png" class="pfp"><span class="name">mohamm3dJA</span></div><div class="region-tag as">AS</div></div>
+        <div class="row"><div class="left"><img src="itzjohio.png" class="pfp"><span class="name">ItzJohio</span></div><div class="region-tag eu">EU</div></div>
+        <div class="row"><div class="left"><img src="WaterPlant.png" class="pfp"><span class="name">WaterPlant</span></div><div class="region-tag eu">EU</div></div>
+        <div class="row"><div class="left"><img src="mazotic.png" class="pfp"><span class="name">mazotic</span></div><div class="region-tag as">AS</div></div>
+        <div class="row"><div class="left"><img src="MaxieX.png" class="pfp"><span class="name">MaxieX</span></div><div class="region-tag eu">EU</div></div>
+        <div class="row"><div class="left"><img src="gmplayz.png" class="pfp"><span class="name">Gmplayz_</span></div><div class="region-tag eu">EU</div></div>
+        <div class="row"><div class="left"><img src="Wraxiee_avatar_face (1).png" class="pfp"><span class="name">Wraxiee</span></div><div class="region-tag eu">EU</div></div>
+        <div class="row"><div class="left"><img src="BetterSyco.png" class="pfp"><span class="name">Bettersyco</span></div><div class="region-tag na">NA</div></div>
+        <div class="row"><div class="left"><img src="samy3mk.png" class="pfp"><span class="name">samy3mk</span></div><div class="region-tag as">AS</div></div>
+        <div class="row"><div class="left"><img src="Rudepoem.png" class="pfp"><span class="name">Rude_Poem</span></div><div class="region-tag as">AS</div></div>
     </div>
 </div>
 
 <script src="https://unpkg.com/lenis@1.1.18/dist/lenis.min.js"></script>
 <script>
-    // Initialize Lenis
-    const lenis = new Lenis()
-
-    function raf(time) {
-      lenis.raf(time)
-      requestAnimationFrame(raf)
-    }
-    requestAnimationFrame(raf)
+    const lenis = new Lenis({ duration: 1.2, smooth: true });
+    function raf(time) { lenis.raf(time); requestAnimationFrame(raf); }
+    requestAnimationFrame(raf);
 
     function openTab(tabName) {
         const container = document.getElementById("mainContainer");
-        
-        // Handle wide layout
-        if(tabName === 'disciplines') {
-            container.classList.add("wide");
-        } else {
-            container.classList.remove("wide");
-        }
+        if(tabName === 'disciplines') container.classList.add("wide");
+        else container.classList.remove("wide");
 
-        // Reset Tabs & Content
         document.querySelectorAll('.tier-list').forEach(el => el.classList.remove('active'));
         document.querySelectorAll('.tab-btn').forEach(el => el.classList.remove('active'));
 
         document.getElementById(tabName).classList.add('active');
         
-        // Highlight correct button if it was a tab click
+        // Use event target to highlight tab
         if (event && event.currentTarget.classList.contains('tab-btn')) {
             event.currentTarget.classList.add("active");
         }
-
-        // Reset scroll position smoothly
         lenis.scrollTo(0);
     }
 </script>
