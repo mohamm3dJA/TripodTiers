@@ -34,17 +34,16 @@
         }
 
         @keyframes sectionFade {
-            from { opacity: 0; transform: translateY(8px); }
+            from { opacity: 0; transform: translateY(6px); }
             to { opacity: 1; transform: translateY(0); }
         }
 
         .container {
             width: 100%;
             max-width: 600px;
-            transition: max-width 0.5s cubic-bezier(0.25, 1, 0.5, 1);
-            will-change: max-width;
         }
 
+        /* Fixed the layout snap by removing the max-width transition friction */
         .container.wide { max-width: 1100px; }
 
         .top-nav {
@@ -123,7 +122,7 @@
         }
 
         .tier-list { display: none; flex-direction: column; gap: 12px; }
-        .tier-list.active { display: flex; animation: sectionFade 0.4s ease-out forwards; }
+        .tier-list.active { display: flex; animation: sectionFade 0.3s ease-out forwards; }
 
         .row {
             background: rgba(21, 21, 27, 0.8);
@@ -205,7 +204,6 @@
         <button class="tab-btn" id="btn-regions" onclick="openTab('regions')">Regions</button>
     </div>
     
-    <!-- PROFILES -->
     <div id="profile-list" class="tier-list">
         <div class="row"><div class="left"><img src="mohamm3d.png" class="pfp"><span class="name">mohamm3dJA</span></div><div class="discord-tag">@mohamm3d</div></div>
         <div class="row"><div class="left"><img src="johio747.png" class="pfp"><span class="name">ItzJohio</span></div><div class="discord-tag">@johio_747</div></div>
@@ -218,7 +216,6 @@
         <div class="row"><div class="left"><img src="wraxie.png" class="pfp"><span class="name">Wraxiee</span></div><div class="discord-tag">@wraxie</div></div>
     </div>
 
-    <!-- SMP -->
     <div id="smp" class="tier-list active">
         <div class="row"><div class="left"><span class="rank-num">01</span><img src="itzjohio.png" class="pfp"><span class="name">ItzJohio</span></div><div class="tier s">S</div></div>
         <div class="row"><div class="left"><span class="rank-num">02</span><img src="mohamm3dJA.png" class="pfp"><span class="name">mohamm3dJA</span></div><div class="tier a">A</div></div>
@@ -232,7 +229,6 @@
         <div class="row"><div class="left"><span class="rank-num">10</span><img src="Rudepoem.png" class="pfp"><span class="name">Rude_Poem</span></div><div class="tier d">D</div></div>
     </div>
 
-    <!-- PVP -->
     <div id="pvp" class="tier-list">
         <div class="row"><div class="left"><span class="rank-num">01</span><img src="mazotic.png" class="pfp"><span class="name">mazotic</span></div><div class="tier s">S</div></div>
         <div class="row"><div class="left"><span class="rank-num">02</span><img src="mohamm3dJA.png" class="pfp"><span class="name">mohamm3dJA</span></div><div class="tier a">A</div></div>
@@ -245,7 +241,6 @@
         <div class="row"><div class="left"><span class="rank-num">09</span><img src="itzjohio.png" class="pfp"><span class="name">ItzJohio</span></div><div class="tier d">D</div></div>
     </div>
 
-    <!-- DISCIPLINES (TIERS) -->
     <div id="disciplines" class="tier-list">
         <div class="tiers-grid">
             <div class="tier-card">
@@ -303,7 +298,6 @@
         </div>
     </div>
 
-    <!-- REGIONS -->
     <div id="regions" class="tier-list">
         <div class="row"><div class="left"><img src="mohamm3dJA.png" class="pfp"><span class="name">mohamm3dJA</span></div><div class="region-tag as">AS</div></div>
         <div class="row"><div class="left"><img src="itzjohio.png" class="pfp"><span class="name">ItzJohio</span></div><div class="region-tag eu">EU</div></div>
@@ -327,32 +321,33 @@
     function openTab(tabName) {
         const container = document.getElementById("mainContainer");
         
-        // Handle layout width changes seamlessly
+        // Instant wide switch to eliminate the flex item stretching glitch
         if(tabName === 'disciplines') {
             container.classList.add("wide");
         } else {
             container.classList.remove("wide");
         }
 
-        // Hide all tier lists and remove active states safely
+        // Clean up classes safely
         document.querySelectorAll('.tier-list').forEach(el => el.classList.remove('active'));
         document.querySelectorAll('.tab-btn').forEach(el => el.classList.remove('active'));
+        
+        const profileNav = document.getElementById("profile-nav-btn");
+        if(profileNav) profileNav.classList.remove('active');
 
-        // Activate targeted tab element
+        // Target new tab
         const targetTab = document.getElementById(tabName);
         if(targetTab) {
             targetTab.classList.add('active');
         }
         
-        // Explicitly map buttons to active view states
+        // Map highlighting correctly
         let targetBtnId = "btn-" + tabName;
         if(tabName === 'profile-list') targetBtnId = "profile-nav-btn";
         
         const targetBtn = document.getElementById(targetBtnId);
         if (targetBtn) {
             targetBtn.classList.add("active");
-        } else if (event && event.currentTarget) {
-            event.currentTarget.classList.add("active");
         }
 
         lenis.scrollTo(0);
