@@ -34,14 +34,14 @@
         }
 
         @keyframes sectionFade {
-            from { opacity: 0; transform: translateY(10px); }
+            from { opacity: 0; transform: translateY(8px); }
             to { opacity: 1; transform: translateY(0); }
         }
 
         .container {
             width: 100%;
             max-width: 600px;
-            transition: max-width 0.7s cubic-bezier(0.23, 1, 0.32, 1);
+            transition: max-width 0.5s cubic-bezier(0.25, 1, 0.5, 1);
             will-change: max-width;
         }
 
@@ -167,8 +167,18 @@
         .eu { background: #4d94ff; color: white; }
         .na { background: #ff4d4d; color: white; }
 
+        /* TIERS GRID & CARDS SETUP */
         .tiers-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 20px; width: 100%; }
         .tier-card { background: rgba(21, 21, 27, 0.8); border: 1px solid #26262e; border-radius: 24px; padding: 25px; transition: 0.3s ease; }
+        .tier-card:hover { border-color: rgba(255, 127, 255, 0.3); }
+        
+        .card-icon {
+            display: block;
+            text-align: center;
+            font-size: 1.8rem;
+            margin-bottom: 5px;
+            filter: drop-shadow(0 0 8px rgba(255, 127, 255, 0.3));
+        }
         .card-title { font-family: 'Outfit', sans-serif; font-weight: 800; font-size: 1.3rem; margin-bottom: 20px; display: block; text-align: center; }
         .player-entry { display: flex; justify-content: space-between; align-items: center; background: rgba(0, 0, 0, 0.25); padding: 10px 15px; border-radius: 12px; margin-bottom: 8px; font-size: 0.95rem; }
     </style>
@@ -177,20 +187,22 @@
 
 <div class="container" id="mainContainer">
     <div class="top-nav">
-        <button class="nav-icon-btn" onclick="openTab('profile-list')" title="Profiles">
+        <button class="nav-icon-btn" onclick="openTab('profile-list')" id="profile-nav-btn" title="Profiles">
             <img src="profiles.png" alt="Profiles">
         </button>
-        <button class="nav-icon-btn disabled"><img src="Tripod.png" style="opacity: 0.5;"></button>
-        <button class="nav-icon-btn disabled"><img src="Tripod.png" style="opacity: 0.5;"></button>
+        <button class="nav-icon-btn" onclick="openTab('smp')" title="SMP Overview">
+            <img src="Tripod.png" alt="Home">
+        </button>
+        <button class="nav-icon-btn disabled"><img src="Tripod.png" style="opacity: 0.2;"></button>
     </div>
 
     <h1>Tripod Tiers</h1>
 
     <div class="tabs">
-        <button class="tab-btn active" onclick="openTab('smp')">SMP</button>
-        <button class="tab-btn" onclick="openTab('pvp')">PvP</button>
-        <button class="tab-btn" onclick="openTab('disciplines')">Tiers</button>
-        <button class="tab-btn" onclick="openTab('regions')">Regions</button>
+        <button class="tab-btn active" id="btn-smp" onclick="openTab('smp')">SMP</button>
+        <button class="tab-btn" id="btn-pvp" onclick="openTab('pvp')">PvP</button>
+        <button class="tab-btn" id="btn-disciplines" onclick="openTab('disciplines')">Tiers</button>
+        <button class="tab-btn" id="btn-regions" onclick="openTab('regions')">Regions</button>
     </div>
     
     <!-- PROFILES -->
@@ -237,6 +249,7 @@
     <div id="disciplines" class="tier-list">
         <div class="tiers-grid">
             <div class="tier-card">
+                <span class="card-icon">⚔️</span>
                 <span class="card-title">Sword</span>
                 <div class="player-entry"><span>mohamm3dJA</span><span class="tier lt4 t-small">LT4</span></div>
                 <div class="player-entry"><span>Gmplayz_</span><span class="tier lt4 t-small">LT4</span></div>
@@ -245,36 +258,43 @@
                 <div class="player-entry"><span>WaterPlant</span><span class="tier lt5 t-small">LT5</span></div>
             </div>
             <div class="tier-card">
+                <span class="card-icon">🪓</span>
                 <span class="card-title">Axe</span>
                 <div class="player-entry"><span>mohamm3dJA</span><span class="tier lt4 t-small">LT4</span></div>
             </div>
             <div class="tier-card">
+                <span class="card-icon">🔮</span>
                 <span class="card-title">Crystal</span>
                 <div class="player-entry"><span>MaxieX</span><span class="tier ht5 t-small">HT5</span></div>
                 <div class="player-entry"><span>mohamm3dJA</span><span class="tier ht5 t-small">HT5</span></div>
             </div>
             <div class="tier-card">
+                <span class="card-icon">🧪</span>
                 <span class="card-title">Potion</span>
                 <div class="player-entry"><span>MaxieX</span><span class="tier ht5 t-small">HT5</span></div>
                 <div class="player-entry"><span>mohamm3dJA</span><span class="tier ht5 t-small">HT5</span></div>
             </div>
             <div class="tier-card">
+                <span class="card-icon">🪘</span>
                 <span class="card-title">Mace</span>
                 <div class="player-entry"><span>mohamm3dJA</span><span class="tier lt4 t-small">LT4</span></div>
                 <div class="player-entry"><span>MaxieX</span><span class="tier lt5 t-small">LT5</span></div>
                 <div class="player-entry"><span>Gmplayz_</span><span class="tier lt5 t-small">LT5</span></div>
             </div>
             <div class="tier-card">
+                <span class="card-icon">📦</span>
                 <span class="card-title">SMP Kit</span>
                 <div class="player-entry"><span>mohamm3dJA</span><span class="tier lt4 t-small">LT4</span></div>
                 <div class="player-entry"><span>Wraxiee</span><span class="tier ht5 t-small">HT5</span></div>
                 <div class="player-entry"><span>MaxieX</span><span class="tier lt5 t-small">LT5</span></div>
             </div>
             <div class="tier-card">
+                <span class="card-icon">💎</span>
                 <span class="card-title">Diamond SMP</span>
                 <div class="player-entry"><span>MaxieX</span><span class="tier ht5 t-small">HT5</span></div>
             </div>
             <div class="tier-card">
+                <span class="card-icon">🥣</span>
                 <span class="card-title">Netherite Pot</span>
                 <div class="player-entry"><span>Wraxiee</span><span class="tier ht5 t-small">HT5</span></div>
                 <div class="player-entry"><span>mohamm3dJA</span><span class="tier lt5 t-small">LT5</span></div>
@@ -306,18 +326,35 @@
 
     function openTab(tabName) {
         const container = document.getElementById("mainContainer");
-        if(tabName === 'disciplines') container.classList.add("wide");
-        else container.classList.remove("wide");
+        
+        // Handle layout width changes seamlessly
+        if(tabName === 'disciplines') {
+            container.classList.add("wide");
+        } else {
+            container.classList.remove("wide");
+        }
 
+        // Hide all tier lists and remove active states safely
         document.querySelectorAll('.tier-list').forEach(el => el.classList.remove('active'));
         document.querySelectorAll('.tab-btn').forEach(el => el.classList.remove('active'));
 
-        document.getElementById(tabName).classList.add('active');
+        // Activate targeted tab element
+        const targetTab = document.getElementById(tabName);
+        if(targetTab) {
+            targetTab.classList.add('active');
+        }
         
-        // Use event target to highlight tab
-        if (event && event.currentTarget.classList.contains('tab-btn')) {
+        // Explicitly map buttons to active view states
+        let targetBtnId = "btn-" + tabName;
+        if(tabName === 'profile-list') targetBtnId = "profile-nav-btn";
+        
+        const targetBtn = document.getElementById(targetBtnId);
+        if (targetBtn) {
+            targetBtn.classList.add("active");
+        } else if (event && event.currentTarget) {
             event.currentTarget.classList.add("active");
         }
+
         lenis.scrollTo(0);
     }
 </script>
